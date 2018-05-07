@@ -4,23 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Launcher {
-        static window w;
-        static int mode;
+    static window w;
+    static int mode;
     public static void main(String[] args) {
         MainMenu m = new MainMenu();
         m.setVisible(true);
-        
-        
+
+
     }
 
 }
 class window extends JFrame{
     JPanel scorepnl = new JPanel(new FlowLayout());
 
-        JLabel scorea = new JLabel("0          ");
-        JLabel scoreb = new JLabel("0          ");
-        JLabel a = new JLabel("Player A");
-        JLabel b = new JLabel("Player B");
+    JLabel scorea = new JLabel("0          ");
+    JLabel scoreb = new JLabel("0          ");
+    JLabel a = new JLabel("Player A");
+    JLabel b = new JLabel("Player B");
     window(){
         this.setLayout(new BorderLayout());
         scorea.setText(""+TheGame.ship1score);
@@ -34,9 +34,9 @@ class window extends JFrame{
         TheGame game = new TheGame();
 
 
-        this.add(game);
+        this.add(game,BorderLayout.CENTER);
         this.pack();
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 

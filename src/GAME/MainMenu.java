@@ -2,7 +2,8 @@
 package GAME;
 
 import static GAME.Launcher.w;
-import java.awt.Font;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -28,7 +29,6 @@ public class MainMenu extends JFrame {
         this.setSize(400,600);
         this.setDefaultCloseOperation(3);
         this.setLayout(null);
-        
         startlbl.setSize(250,50);
         startlbl.setLocation(80, 30);
         startlbl.setFont(new Font("Arial", Font.PLAIN, 30));
