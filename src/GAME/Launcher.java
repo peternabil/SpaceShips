@@ -4,40 +4,49 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Launcher {
-
+        static window w;
+        static int mode;
     public static void main(String[] args) {
-        JFrame window = new JFrame("Space Wars");
-        window.setLayout(new BorderLayout());
-        JPanel scorepnl = new JPanel(new FlowLayout());
+        MainMenu m = new MainMenu();
+        m.setVisible(true);
+        
+        
+    }
+
+}
+class window extends JFrame{
+    JPanel scorepnl = new JPanel(new FlowLayout());
 
         JLabel scorea = new JLabel("0          ");
         JLabel scoreb = new JLabel("0          ");
         JLabel a = new JLabel("Player A");
         JLabel b = new JLabel("Player B");
-
-        // here you will add the functionality of the score fields
-        // save the score
-        // when the someone wins you will close this window display a window with who won and the score with an option to rematch and another to go to main menu
+    window(){
+        this.setLayout(new BorderLayout());
+        scorea.setText(""+TheGame.ship1score);
+        scoreb.setText(""+TheGame.ship2score);
         scorepnl.add(a);
         scorepnl.add(scorea);
         scorepnl.add(b);
         scorepnl.add(scoreb);
 
-        window.add(scorepnl,BorderLayout.SOUTH);
+        this.add(scorepnl,BorderLayout.SOUTH);
         TheGame game = new TheGame();
 
 
-        window.add(game);
-        window.pack();
-        window.setResizable(true);
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        this.add(game);
+        this.pack();
+        this.setResizable(true);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         Timer t = new Timer(1000,game);
 
-        window.addKeyListener(game);
+        this.addKeyListener(game);
 
         t.start();
+    }
+    public void close(){
+        this.dispose();
     }
 }
