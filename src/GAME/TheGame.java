@@ -7,14 +7,15 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 
+
 public class TheGame extends JComponent implements ActionListener,KeyListener {
     boolean shot1 = false;
     boolean shot2 = false;
-    Ships ship1 = new Ships(new ImageIcon("/Users/peternabil/Desktop/untitled folder/pictures/first.png"), 10, 400);
-    Ships ship2 = new Ships(new ImageIcon("/Users/peternabil/Desktop/untitled folder/pictures/fourth.png"), 800-110, 400);
+    Ships ship1 = new Ships(new ImageIcon("G:\\Programming Project\\pictures\\first.png"), 10, 400);
+    Ships ship2 = new Ships(new ImageIcon("G:\\Programming Project\\pictures\\fourth.png"), 800-110, 400);
 
-    int ship1score=0;
-    int ship2score=0;
+    static int ship1score=0;
+    static int ship2score=0;
 
     private int lasersize = 800;
 
@@ -25,7 +26,7 @@ public class TheGame extends JComponent implements ActionListener,KeyListener {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(new ImageIcon("/Users/peternabil/Desktop/untitled folder/pictures/Wiki-background copy.jpg").getImage(), 0, 0, null);
+        g.drawImage(new ImageIcon("G:\\Programming Project\\pictures\\Wiki-background copy.jpg").getImage(), 0, 0, null);
         ship1.paintComponent(g);
         ship2.paintComponent(g);
         if (shot1) {
@@ -33,13 +34,23 @@ public class TheGame extends JComponent implements ActionListener,KeyListener {
             Laser l = new Laser(ship1.posx + 70, ship1.posy + 38, Color.red);
             if (l.y<=ship2.posy+70 && l.y >= ship2.posy) {
                 range = 680;
-                g.drawImage(new ImageIcon("/Users/peternabil/Desktop/untitled folder/pictures/thruster-spritesheet1 copy.png").getImage(),ship2.posx+50,ship2.posy+10,null);
+                g.drawImage(new ImageIcon("G:\\Programming Project\\pictures\\thruster-spritesheet1 copy.png").getImage(),ship2.posx+50,ship2.posy+10,null);
                 ship1score+=10;
-                if (ship2score<10){
-                    // display the new screen as player 1 on the right won
-                }
-                else {
-                    ship2score -= 10;
+                Launcher.w.scorea.setText(""+ship1score);
+                ship1.health-=1;
+                if (ship1.health==0){
+                    JOptionPane.showMessageDialog(null, "Ship 2 has won");
+                    ship1score=0;
+                    ship2score=0;
+                    ship1.posx=10;
+                    ship1.posy=400;
+                    ship2.posx=800-110;
+                    ship2.posy=400;
+                    ship1.health=10;
+                    ship2.health=10;
+                    Launcher.w.close();
+                    MainMenu m = new MainMenu();
+                    m.setVisible(true);
                 }
             }
             for (int i = 0; i < range; i++) {
@@ -54,13 +65,25 @@ public class TheGame extends JComponent implements ActionListener,KeyListener {
             Laser l = new Laser(ship2.posx + 27, ship2.posy + 36, Color.red);
             if (l.y<=ship1.posy+70 && l.y >= ship1.posy) {
                 range = 680;
-                g.drawImage(new ImageIcon("/Users/peternabil/Desktop/untitled folder/pictures/thruster-spritesheet1 copy.png").getImage(),ship1.posx+50,ship2.posy+10,null);
+                g.drawImage(new ImageIcon("/Users/peternabil/Desktop/Programming Project/pictures/thruster-spritesheet1 copy.png").getImage(),ship1.posx+50,ship2.posy+10,null);
                 ship2score+=10;
-                if (ship1score<10){
-                    // display the new screen as player 2 on the right won
+                if(Launcher.mode==1){
+                    ship2.health-=1;
                 }
-                else {
-                    ship1score -= 10;
+                Launcher.w.scoreb.setText(""+ship2score);
+                if (ship2.health==0){
+                    JOptionPane.showMessageDialog(null, "Ship 1 has won");
+                    ship1score=0;
+                    ship2score=0;
+                    ship1.posx=10;
+                    ship1.posy=400;
+                    ship2.posx=800-110;
+                    ship2.posy=400;
+                    ship1.health=10;
+                    ship2.health=10;
+                    Launcher.w.close();
+                    MainMenu m = new MainMenu();
+                    m.setVisible(true);
                 }
             }
             for (int i = 0; i < range; i++) {
@@ -108,8 +131,6 @@ public class TheGame extends JComponent implements ActionListener,KeyListener {
             repaint();
         }
     }
-
-
 
 
 
